@@ -1,6 +1,4 @@
 package it.unisa.c07.biblionet.model.entity;
-import it.unisa.c07.biblionet.model.entity.utente.Esperto;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
 import it.unisa.c07.biblionet.utils.Length;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,23 +45,6 @@ public class Genere {
     @EqualsAndHashCode.Exclude
     private String descrizione;
 
-    /**
-     * Rappresenta la lista di lettori
-     * a cui piace questo genere.
-     */
-
-    @ManyToMany(mappedBy = "generi")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Lettore> lettori;
-
-    /**
-     * Rappresenta la lista degli esperti in questo genere.
-     */
-    @ManyToMany(mappedBy = "generi")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Esperto> esperti;
 
     /**
      * Rappresenta la lista di libri aventi questo genere.
@@ -73,14 +54,6 @@ public class Genere {
     @EqualsAndHashCode.Exclude
     private List<Libro> libri;
 
-    /**
-     * Rappresenta la lista di Club del libro
-     * riguardanti questo genere.
-     */
-    @ManyToMany(mappedBy = "generi")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<ClubDelLibro> clubs;
 
 /*
     public boolean equals (Object o){

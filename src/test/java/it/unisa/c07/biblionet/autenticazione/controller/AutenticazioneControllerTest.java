@@ -1,8 +1,6 @@
 package it.unisa.c07.biblionet.autenticazione.controller;
 
 import it.unisa.c07.biblionet.autenticazione.service.AutenticazioneService;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
-import it.unisa.c07.biblionet.model.entity.utente.UtenteRegistrato;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

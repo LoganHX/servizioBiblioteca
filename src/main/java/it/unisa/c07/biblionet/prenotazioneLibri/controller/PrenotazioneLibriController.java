@@ -1,11 +1,10 @@
 package it.unisa.c07.biblionet.prenotazioneLibri.controller;
 
 import it.unisa.c07.biblionet.model.dao.customQueriesResults.ILibroIdAndName;
+import it.unisa.c07.biblionet.model.dao.utente.BibliotecaDAO;
 import it.unisa.c07.biblionet.model.entity.Libro;
 import it.unisa.c07.biblionet.model.entity.TicketPrestito;
 import it.unisa.c07.biblionet.model.entity.utente.Biblioteca;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
-import it.unisa.c07.biblionet.model.entity.utente.UtenteRegistrato;
 import it.unisa.c07.biblionet.prenotazioneLibri.service.PrenotazioneLibriService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -37,6 +36,7 @@ public class PrenotazioneLibriController {
      * persistenza.
      */
     private final PrenotazioneLibriService prenotazioneService;
+    private final BibliotecaDAO bibliotecaDAO;
 
     /**
      * Implementa la funzionalità che permette di
@@ -125,15 +125,17 @@ public class PrenotazioneLibriController {
                                        @RequestParam final String idLibro,
                                        final Model model) {
 
-        UtenteRegistrato utente =
+        /*UtenteRegistrato utente =
                 (UtenteRegistrato) model.getAttribute("loggedUser");
         assert utente != null;
         if (utente.getTipo().equals("Lettore")) {
             Lettore l = (Lettore) utente;
-            prenotazioneService.richiediPrestito(l,
+            todo da sostituire col token
+         */
+            prenotazioneService.richiediPrestito("dybala@gmail.com",//todo
                     idBiblioteca,
                     Integer.parseInt(idLibro));
-        }
+        //}
         return "redirect:/prenotazione-libri";
     }
 
@@ -148,11 +150,15 @@ public class PrenotazioneLibriController {
     @RequestMapping(value = "/visualizza-richieste",
             method = RequestMethod.GET)
     public String visualizzaRichieste(final Model model) {
-        UtenteRegistrato utente =
+        /*UtenteRegistrato utente =
                 (UtenteRegistrato) model.getAttribute("loggedUser");
         assert utente != null;
-        if (utente.getTipo().equals("Biblioteca")) {
-            Biblioteca biblioteca = (Biblioteca) utente;
+        if (utente.getTipo().equals("Lettore")) {
+            Lettore l = (Lettore) utente;
+            todo da sostituire col token
+         */
+        if ("Biblioteca".equals("Biblioteca")) { //todo
+            Biblioteca biblioteca = bibliotecaDAO.getOne("dybala@gmail.com");
             List<TicketPrestito> lista =
                     prenotazioneService.getTicketsByBiblioteca(biblioteca);
             List<TicketPrestito> list1 = new ArrayList<>();
@@ -235,14 +241,10 @@ public class PrenotazioneLibriController {
     @RequestMapping(value = "/visualizza-prenotazioni",
             method = RequestMethod.GET)
     public String visualizzaPrenotazioniLettore(final Model model) {
-        UtenteRegistrato utente =
-                (UtenteRegistrato) model.getAttribute("loggedUser");
-        assert utente != null;
-        if (utente.getTipo().equals("Lettore")) {
-            Lettore lettore = (Lettore) utente;
+        //todo sostituire col token
 
             List<TicketPrestito> listaTicket =
-                    prenotazioneService.getTicketsLettore(lettore);
+                    prenotazioneService.getTicketsLettore("dybala@gmail.com");
             List<TicketPrestito> list1 = new ArrayList<>();
             List<TicketPrestito> list2 = new ArrayList<>();
             List<TicketPrestito> list3 = new ArrayList<>();
@@ -266,7 +268,7 @@ public class PrenotazioneLibriController {
             model.addAttribute("listaTicketAccettati", list2);
             model.addAttribute("listaTicketChiusi", list3);
             model.addAttribute("listaTicketRifiutati", list4);
-        }
+       // }
         return "prenotazione-libri/visualizza-richieste-lettore";
     }
 

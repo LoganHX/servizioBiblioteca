@@ -1,12 +1,9 @@
 package it.unisa.c07.biblionet.autenticazione.service;
 
 import it.unisa.c07.biblionet.BiblionetApplication;
-import it.unisa.c07.biblionet.model.dao.utente.LettoreDAO;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,7 +19,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 /**
  * Implementa l'integration testing del service per il sottosistema

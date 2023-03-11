@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -25,9 +23,17 @@ import java.util.List;
 @Entity
 @SuperBuilder
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @NoArgsConstructor
-public class Biblioteca extends UtenteRegistrato {
+public class Biblioteca {
+
+    /**
+     * Rappresenta l'ID di un utente registrato. todo è sostanzialmente una chiave esterna (il resto dei dati è nel microservizio autenticazione)
+     */
+    @Id
+    @Column(nullable = false, length = Length.LENGTH_320)
+    @NonNull
+    private String email;
 
 
     /**
@@ -39,10 +45,13 @@ public class Biblioteca extends UtenteRegistrato {
 
     /**
      * Rappresenta la lista di esperti che lavorano nella biblioteca.
+     * todo questa relazione va modellata al contrario solo in esperto
      */
+    /*
     @OneToMany(mappedBy = "biblioteca")
     @ToString.Exclude
     private List<Esperto> esperti;
+    */
 
     /**
      * Rappresenta la lista di ticket riguardanti le richieste di prestito.
@@ -59,27 +68,53 @@ public class Biblioteca extends UtenteRegistrato {
     private List<Possesso> possessi;
 
     /**
-     * Rappresenta il tipo di utente.
+     * Rappresente la provincia dove vive l'utente registrato.
      */
-    @Transient
-    private String tipo = "Biblioteca";
+    @Column(nullable = false, length = Length.LENGTH_30)
+    @NonNull
+    private String provincia;
+
+    /**
+     * Rappresenta la città dove vive l'utente registrato.
+     */
+    @Column(nullable = false, length = Length.LENGTH_30)
+    @NonNull
+    private String citta;
+
+    /**
+     * Rappresenta la via dove vive l'utente registrato.
+     */
+    @Column(nullable = false, length = Length.LENGTH_30)
+    @NonNull
+    private String via;
+
+    /**
+     * Rappresenta il recapito telefonico dell'utente registrato.
+     */
+    @Column(nullable = false, length = Length.LENGTH_10)
+    @NonNull
+    private String recapitoTelefonico;
+
 
     /**
      *
      * @param email È la mail della biblioteca.
-     * @param password È la password di accesso della biblioteca.
      * @param provincia È la provincia in cui ha sede la biblioteca.
      * @param citta È la città in cui ha sede la biblioteca.
      * @param via È l'indirizzo in cui ha sede la biblioteca.
      * @param recapitoTelefonico È il numero di telefono della biblioteca.
      * @param nomeBiblioteca È il nome della biblioteca.
      */
-    public Biblioteca(final String email, final String password,
+    public Biblioteca(final String email,
                       final String provincia, final String citta,
                       final String via, final String recapitoTelefonico,
                       final String nomeBiblioteca) {
 
-        super(email, password, provincia, citta, via, recapitoTelefonico);
+        this.email = email;
+        this.provincia = provincia;
+        this.citta = citta;
+        this.via = via;
+        this.recapitoTelefonico = recapitoTelefonico;
         this.nomeBiblioteca = nomeBiblioteca;
     }
 

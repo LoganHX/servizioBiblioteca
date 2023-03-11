@@ -1,7 +1,6 @@
 package it.unisa.c07.biblionet.comunicazioneEsperto.controller;
 
 import it.unisa.c07.biblionet.comunicazioneEsperto.service.ComunicazioneEspertoServiceImpl;
-import it.unisa.c07.biblionet.model.entity.utente.Esperto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

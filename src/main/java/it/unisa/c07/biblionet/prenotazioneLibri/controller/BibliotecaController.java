@@ -1,10 +1,10 @@
 package it.unisa.c07.biblionet.prenotazioneLibri.controller;
 
 
+import it.unisa.c07.biblionet.model.dao.utente.BibliotecaDAO;
 import it.unisa.c07.biblionet.model.entity.Genere;
 import it.unisa.c07.biblionet.model.entity.Libro;
 import it.unisa.c07.biblionet.model.entity.utente.Biblioteca;
-import it.unisa.c07.biblionet.model.entity.utente.UtenteRegistrato;
 import it.unisa.c07.biblionet.model.form.LibroForm;
 import it.unisa.c07.biblionet.prenotazioneLibri.service.PrenotazioneLibriService;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +43,7 @@ public class BibliotecaController {
      * persistenza.
      */
     private final PrenotazioneLibriService prenotazioneService;
+    private final BibliotecaDAO bibliotecaDAO;
 
     /**
      * Implementa la funzionalità che permette di
@@ -71,11 +72,14 @@ public class BibliotecaController {
                             method = RequestMethod.GET)
     public String visualizzaInserimentoLibro(final Model model) {
 
-        UtenteRegistrato utente =
+        /*UtenteRegistrato utente =
                 (UtenteRegistrato) model.getAttribute("loggedUser");
         if (utente == null || utente.getTipo() != "Biblioteca") {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
+
+        todo sostituire con token
+         */
 
         List<Libro> listaLibri =
                 prenotazioneService.visualizzaListaLibriCompleta();
@@ -106,12 +110,15 @@ public class BibliotecaController {
         if (isbn == null) {
             return "redirect:/biblioteca/inserisci-nuovo-libro";
         }
+        /*
         UtenteRegistrato utente =
                 (UtenteRegistrato) model.getAttribute("loggedUser");
         if (utente == null || utente.getTipo() != "Biblioteca") {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-        Biblioteca b = (Biblioteca) utente;
+        todo sotituire con token
+        */
+        Biblioteca b = (Biblioteca) bibliotecaDAO.getOne("dybala@gmail.com");
         List<String> glist = Arrays.asList(generi.clone());
         Libro l = prenotazioneService.inserimentoPerIsbn(
                 isbn, b.getEmail(), numCopie, glist);
@@ -136,13 +143,15 @@ public class BibliotecaController {
     public String inserisciDaDatabase(final Model model,
                                    @RequestParam final int idLibro,
                                    @RequestParam final int numCopie) {
-
+/*
         UtenteRegistrato utente =
                 (UtenteRegistrato) model.getAttribute("loggedUser");
         if (utente == null || utente.getTipo() != "Biblioteca") {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-        Biblioteca b = (Biblioteca) utente;
+        todo sostituire con token
+        */
+        Biblioteca b = (Biblioteca) bibliotecaDAO.getOne("dybala@gmail.com");
         Libro l = prenotazioneService.inserimentoDalDatabase(
                 idLibro, b.getEmail(), numCopie);
         return "redirect:/prenotazione-libri/" + l.getIdLibro()
@@ -164,13 +173,15 @@ public class BibliotecaController {
                                        final LibroForm libro,
                                        final int numCopie,
                                        final String annoPubblicazione) {
-
+/*
         UtenteRegistrato utente =
                 (UtenteRegistrato) model.getAttribute("loggedUser");
         if (utente == null || utente.getTipo() != "Biblioteca") {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-        Biblioteca b = (Biblioteca) utente;
+        todo sostituire con token
+        */
+        Biblioteca b = (Biblioteca) bibliotecaDAO.getOne("dybala@gmail.com");
         Libro l = new Libro();
         l.setTitolo(libro.getTitolo());
         if (libro.getIsbn() != null) {

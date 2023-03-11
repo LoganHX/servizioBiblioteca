@@ -5,7 +5,6 @@ import it.unisa.c07.biblionet.model.entity.Genere;
 import it.unisa.c07.biblionet.model.entity.Libro;
 import it.unisa.c07.biblionet.model.entity.TicketPrestito;
 import it.unisa.c07.biblionet.model.entity.utente.Biblioteca;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
 
 import java.util.List;
 
@@ -69,7 +68,7 @@ public interface PrenotazioneLibriService {
      * @param idLibro id del libro
      * @return Il ticket aperto in attesa di approvazione
      */
-    TicketPrestito richiediPrestito(Lettore lettore,
+    TicketPrestito richiediPrestito(String lettore,
                                     String idBiblioteca,
                                     int idLibro);
 
@@ -138,7 +137,7 @@ public interface PrenotazioneLibriService {
      * @param lettore il Lettore di cui recuperare i ticket
      * @return la lista dei ticket
      */
-    List<TicketPrestito> getTicketsLettore(Lettore lettore);
+    List<TicketPrestito> getTicketsLettore(String lettore);
 
     /**
      * Implementa la funzionalità che permette di

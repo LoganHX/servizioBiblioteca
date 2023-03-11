@@ -12,7 +12,6 @@ import it.unisa.c07.biblionet.model.entity.Possesso;
 import it.unisa.c07.biblionet.model.entity.TicketPrestito;
 import it.unisa.c07.biblionet.model.entity.compositeKey.PossessoId;
 import it.unisa.c07.biblionet.model.entity.utente.Biblioteca;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
 import it.unisa.c07.biblionet.prenotazioneLibri.service.bookApiAdapter.BookApiAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -157,7 +156,7 @@ public class PrenotazioneLibriServiceImpl implements PrenotazioneLibriService {
      * @return Il ticket aperto in attesa di approvazione
      */
     @Override
-    public TicketPrestito richiediPrestito(final Lettore lettore,
+    public TicketPrestito richiediPrestito(final String lettore,
                                            final String idBiblioteca,
                                            final int idLibro) {
         TicketPrestito ticket = new TicketPrestito();
@@ -289,13 +288,13 @@ public class PrenotazioneLibriServiceImpl implements PrenotazioneLibriService {
     /**
      * Implementa la funzionalità che permette
      * di ottenere la lista di ticket aperti da un Lettore.
-     * @param lettore il Lettore di cui recuperare i ticket
+     * @param emailLettore il Lettore di cui recuperare i ticket
      * @return la lista dei ticket
      */
     @Override
-    public List<TicketPrestito> getTicketsLettore(final Lettore lettore) {
+    public List<TicketPrestito> getTicketsLettore(final String emailLettore) {
         return ticketPrestitoDAO.
-                findAllByLettoreEmail(lettore.getEmail());
+                findAllByLettore(emailLettore);
     }
 
 

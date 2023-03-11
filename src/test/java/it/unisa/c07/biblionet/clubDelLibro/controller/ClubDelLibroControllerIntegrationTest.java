@@ -1,6 +1,5 @@
 package it.unisa.c07.biblionet.clubDelLibro.controller;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import it.unisa.c07.biblionet.BiblionetApplication;
-import it.unisa.c07.biblionet.model.dao.ClubDelLibroDAO;
 import it.unisa.c07.biblionet.model.dao.utente.BibliotecaDAO;
-import it.unisa.c07.biblionet.model.dao.utente.LettoreDAO;
 import it.unisa.c07.biblionet.model.entity.utente.Biblioteca;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
 import lombok.Getter;
 import lombok.Setter;
 

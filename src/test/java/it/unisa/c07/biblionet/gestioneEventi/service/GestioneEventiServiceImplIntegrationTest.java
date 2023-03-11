@@ -2,7 +2,6 @@ package it.unisa.c07.biblionet.gestioneEventi.service;
 
 import it.unisa.c07.biblionet.BiblionetApplication;
 import it.unisa.c07.biblionet.comunicazioneEsperto.service.ComunicazioneEspertoService;
-import it.unisa.c07.biblionet.model.entity.Evento;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;

@@ -98,15 +98,11 @@ public class Libro {
     @ToString.Exclude
     private List<Genere> generi;
 
-    /**
-     * Rappresente gli eventi di cui un libro è parte.
-     */
-    @OneToMany(mappedBy = "libro")
-    @ToString.Exclude
-    private List<Evento> eventi;
+
 
     /**
      * Rappresenta la relazione di possesso con una biblioteca.
+     * todo forse ha senso modellare questa relazione al contrario e one-way? (Many-to-One da Possessi e basta e rimuovere la One-to-Many da qua)
      */
     @OneToMany(mappedBy = "possessoID.libroID")
     @ToString.Exclude

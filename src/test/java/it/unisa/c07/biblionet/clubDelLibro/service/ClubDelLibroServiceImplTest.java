@@ -1,11 +1,7 @@
 package it.unisa.c07.biblionet.clubDelLibro.service;
 
-import it.unisa.c07.biblionet.model.dao.ClubDelLibroDAO;
 import it.unisa.c07.biblionet.model.dao.GenereDAO;
-import it.unisa.c07.biblionet.model.dao.utente.LettoreDAO;
-import it.unisa.c07.biblionet.model.entity.ClubDelLibro;
 import it.unisa.c07.biblionet.model.entity.Genere;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

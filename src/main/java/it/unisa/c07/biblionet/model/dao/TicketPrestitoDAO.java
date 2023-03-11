@@ -10,8 +10,7 @@ import java.util.List;
  * Questa classe rappresenta il DAO di un TicketPrestito.
  */
 @Repository
-public interface TicketPrestitoDAO
-            extends JpaRepository<TicketPrestito, Integer> {
+public interface TicketPrestitoDAO extends JpaRepository<TicketPrestito, Integer> {
 
     /**
      * Seleziona la lista dei ticket di una determinata
@@ -23,8 +22,8 @@ public interface TicketPrestitoDAO
                 findAllByBibliotecaEmail(String bibliotecaEmail);
     /**
      * Seleziona la lista dei ticket di un lettore.
-     * @param lettoreEmail L'email della biblioteca
+     * @param lettore L'email della biblioteca
      * @return I ticket del lettore
      */
-    List<TicketPrestito> findAllByLettoreEmail(String lettoreEmail);
+    List<TicketPrestito> findAllByLettore(String lettore);
 }

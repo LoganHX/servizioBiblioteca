@@ -1,7 +1,6 @@
 package it.unisa.c07.biblionet.model.entity;
 
 import it.unisa.c07.biblionet.model.entity.utente.Biblioteca;
-import it.unisa.c07.biblionet.model.entity.utente.Lettore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -106,10 +105,9 @@ public class TicketPrestito {
     /**
      * Rappresenta il lettore che prende in prestito il libro.
      */
+    //TODO sostituiso "private Lettore lettore" con "private String lettore (email)", la chiave esterna i cui dati sono altrove (autenticazione e club)
     @NonNull
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @ManyToOne
-    @ToString.Exclude
-    private Lettore lettore;
+    @Column(nullable = false)
+    private String lettore;
 
 }

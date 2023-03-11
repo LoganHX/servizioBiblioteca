@@ -1,7 +1,6 @@
 package it.unisa.c07.biblionet.comunicazioneEsperto.service;
 
 import it.unisa.c07.biblionet.BiblionetApplication;
-import it.unisa.c07.biblionet.model.entity.utente.Esperto;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.Assertions;
