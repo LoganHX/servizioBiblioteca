@@ -1,6 +1,8 @@
 package it.unisa.c07.biblionet.prenotazioneLibri.controller;
 
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import it.unisa.c07.biblionet.model.dao.utente.BibliotecaDAO;
 import it.unisa.c07.biblionet.model.entity.Genere;
 import it.unisa.c07.biblionet.model.entity.Libro;
@@ -12,13 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -48,17 +47,19 @@ public class BibliotecaController {
     /**
      * Implementa la funzionalità che permette di
      * visualizzare tutte le biblioteche iscritte.
-     * @param model Il model in cui salvare la lista
      * @return La view per visualizzare le biblioteche
      */
     @RequestMapping(value = "/visualizza-biblioteche",
             method = RequestMethod.GET)
-    public String visualizzaListaBiblioteche(final Model model) {
+    @ResponseBody
+    @CrossOrigin
+    public List<Biblioteca> visualizzaListaBiblioteche(@RequestHeader (name="Authorization") String token) {
 
-        model.addAttribute("listaBiblioteche",
-                prenotazioneService.getAllBiblioteche());
-
-        return "/biblioteca/visualizza-lista-biblioteche";
+        token = token.substring(7);
+        Claims claims = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody();
+        System.out.println(claims.get("sub"));
+        System.out.println(claims.get("role"));
+        return prenotazioneService.getAllBiblioteche();
     }
 
     /**
